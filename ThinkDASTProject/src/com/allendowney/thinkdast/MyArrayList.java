@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * @author downey
+ * @author Riley Smith
  * @param <T>
  *
  */
@@ -44,8 +44,15 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public boolean add(T element) {
-		// TODO: FILL THIS IN!
-		return false;
+		if (size >= array.length) {
+            // make a bigger array and copy over the elements
+            T[] bigger = (T[]) new Object[array.length * 2];
+            System.arraycopy(array, 0, bigger, 0, array.length);
+            array = bigger;
+        } 
+        array[size] = element;
+        size++;
+        return true;
 	}
 
 	@Override
@@ -110,7 +117,11 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public int indexOf(Object target) {
-		// TODO: FILL THIS IN!
+		for (int index = 0; index < size; index++) {
+			if (equals(target, array[index])) {
+				return index;
+			}
+		}
 		return -1;
 	}
 
@@ -180,9 +191,13 @@ public class MyArrayList<T> implements List<T> {
 	}
 
 	@Override
-	public T remove(int index) {
-		// TODO: FILL THIS IN!
-		return null;
+	public T remove(int indexRemove) {
+		T object = get(indexRemove);
+		for (int index = indexRemove; index < size - 1; index++) {
+			array[index] = array[index+1];
+		}
+		size--;
+		return object;
 	}
 
 	@Override
@@ -201,8 +216,9 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public T set(int index, T element) {
-		// TODO: FILL THIS IN!
-		return null;
+		T original = get(index);
+		array[index] = element;
+		return original;
 	}
 
 	@Override
