@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * @author Riley Smith
+ * @author Downey &  Riley Smith
  * @param <T>
  *
  */
